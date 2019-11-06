@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        </head>
+        <body>
+            <div id="root">
+                
+            </div>
+            <script src="./js/react.development.js"></script>
+            <script  src="./js/react-dom.development.js"></script>
+            <script src="./js/babel.js"></script>
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <script type="text/babel">
+                const rootHandle = document.getElementById('root')
+                class UserList extends React.Component {
+                    constructor(){
+                        super()
+                        this.state={
+                            users: [],
+                            view: ''
+                        }
+                    }
+
+                    componentDidMount(){
+                        console.log('component did mount')
+                        axios.get('https://jsonplaceholder.typicode.com/users')
+                            .then(response =>{
+                                console.log('axios success function')
+                                const users=response.data
+                                this.setState({users})
+                            })
+                            .catch(err =>{
+                                console.log('err')
+                            })
+                    }
+
+                    handleRadioButton=(e)=>{
+                        const gender = e.target.value
+                        this.setState({gender})
+                    }
+
+                    render(){
+                        console.log('render')
+                        return(
+                            <div>
+                                <input type="radio" name="view" value={this.state.view} 
+                                        checked={this.state.view==='list'} onChange={this.handleRadioButton}/>List
+                                        <input type="radio" name="view" value={this.state.view} 
+                                        checked={this.state.view==='list'} onChange={this.handleRadioButton}/>Table
+                                <h2>Listing users-{this.state.users.length} </h2>
+                                <ul>
+                                    {this.state.users.map(user=>{
+                                        return <UserItemList key={user.id} name={user.name} email={user.email} />
+                                    })}
+                                </ul>
+                           
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>Email</th>
+                                    </tr>
+                                    <tr>
+                                    {this.state.users.map(function(user){
+                                            return <tr>{user.name} {user.email}</tr>
+                                    })}
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                            </div>
+                            
+                      
+                        )
+                    }
+                }
+
+                function UserItemList(props){
+                    return(
+                        <li>
+                            {props.name} {props.email}
+                        </li>
+                    )
+                }
+
+
+                ReactDOM.render(<UserList/>, rootHandle)
+            </script>
+        </body>
+
+</html>

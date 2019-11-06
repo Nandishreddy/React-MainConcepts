@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        <link href="./css/bootstrap.css" rel="stylesheet" />
+
+        </head>
+        <body>
+            <div id="root">
+
+            </div>
+            <script src="./js/react.development.js"></script>
+            <script  src="./js/react-dom.development.js"></script>
+            <script src="./js/babel.js"></script>
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <script type="text/babel">
+                const rootHandle = document.getElementById('root')
+                class TodosList extends React.Component {
+                    constructor(){
+                        super()
+                        this.state={
+                            todos: []
+                        }
+                    }
+
+                    componentDidMount(){
+                        console.log('component did mount')
+                        axios.get('https://jsonplaceholder.typicode.com/todos')
+                            .then(response =>{
+                                console.log('axios success function')
+                                const todos=response.data
+                                this.setState({todos})
+                            })
+                            .catch(err =>{
+                                console.log('err')
+                            })
+                    }
+
+                    render(){
+                        console.log('render')
+                        return(
+                            <div className="container">
+                                <div class="row">
+                                    <div class="col-md-6 offset-md-3">
+                                        <h2>Listing Todos-{this.state.todos.length} </h2>
+                                    <table className="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>id</th>
+                                            <th>title</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {this.state.todos.map(function(todo){
+                                            return (<tr className={todo.completed ? "table-success" : "table-danger"}>
+                                                        <td>{todo.id}</td>
+                                                        <td>{todo.title}</td>
+                                                    </tr>     
+                                            )                                      
+                                    })}
+                                    </tbody>
+                                </table> 
+                                </div>
+                            </div>                             
+                            </div>
+                        )
+                    }
+                }
+                
+                ReactDOM.render(<TodosList/>, rootHandle)
+            </script>
+        </body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        <link href="./css/bootstrap.css" rel="stylesheet" />
+
+        </head>
+        <body>
+            <div id="root">
+
+            </div>
+            <script src="./js/react.development.js"></script>
+            <script  src="./js/react-dom.development.js"></script>
+            <script src="./js/babel.js"></script>
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <script type="text/babel">
+                const rootHandle = document.getElementById('root')
+                class TodosList extends React.Component {
+                    constructor(){
+                        super()
+                        this.state={
+                            todos: []
+                        }
+                    }
+
+                    componentDidMount(){
+                        console.log('component did mount')
+                        axios.get('https://jsonplaceholder.typicode.com/todos')
+                            .then(response =>{
+                                console.log('axios success function')
+                                const todos=response.data
+                                this.setState({todos})
+                            })
+                            .catch(err =>{
+                                console.log('err')
+                            })
+                    }
+
+                    render(){
+                        console.log('render')
+                        return(
+                                <div className="container">
+                                    <div className="row">
+                                        {
+                                            this.state.todos.map(todo => {
+                                                return (
+                                                    <div className="col-md-4 mb-2" key={todo.id}>
+                                                    <div class={todo.completed ? "card text-white bg-success mb-3" : "card text-white bg-danger mb-3"}>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{todo.title}</h5>
+                                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </div>
+                            )
+                    }
+                }
+                
+                ReactDOM.render(<TodosList/>, rootHandle)
+            </script>
+        </body>
+
+</html>

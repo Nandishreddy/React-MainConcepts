@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        </head>
+        <body>
+            <div id="root">
+                
+            </div>
+            <script src="./js/react.development.js"></script>
+            <script  src="./js/react-dom.development.js"></script>
+            <script src="./js/babel.js"></script>
+            <script type="text/babel">
+                const rootHandle = document.getElementById('root')
+
+                //1.create a function component called as Users, and maintain state to store all users information
+                // 2. create a UserForm component, which will be a controlled component, with input fields like name & email
+                // 3. write the event handlers
+                // 4. when the user clicks on the submit button, create a user object and print in the console, sample user obj - {id: Number(new Date()), name, email}
+                class Users extends React.Component{
+                    constructor(){
+                        super()
+                        this.state={
+                            name: '',
+                            email: ''
+                        }
+                    }
+
+                    handleSubmit=(e)=>{
+                        e.preventDefault()
+                        const name = e.value.name
+                        this.setState({name})
+                        const email = e.value.email
+                        this.setState({email})
+                    
+                    }
+
+                    render(){
+                        return(
+                            <div>
+                                <form onClick={this.handleSubmit}>
+                                    <UserForm />
+                                </form>
+                            </div>
+                        )
+                    }
+
+                }
+
+                class UserForm extends React.Component{
+                    render(){
+                        return(
+                            <div>
+                                <lable>Name:
+                                <input type="text" value="" />
+                                </lable><br/>
+                                <lable>Email:
+                                <input type="email" value="" />
+                                </lable><br/>
+                                <input type="Submit" name="Submit"/>
+                            </div>
+                        ) 
+                    }
+                }
+
+                
+
+                ReactDOM.render(<Users/>, rootHandle)
+            </script>
+        </body>
+
+</html>

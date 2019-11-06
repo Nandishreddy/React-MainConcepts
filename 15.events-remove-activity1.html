@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>  </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        
+        <!--https://unpkg.com/react@16.8.6/umd/-->
+        <script src="./js/react.development.js"></script>
+        <!--https://unpkg.com/react-dom@16.8.6/umd/-->
+        <script src="./js/react-dom.development.js"></script>
+        <!--https://unpkg.com/babel-standalone@6.26.0/babel.js-->
+        <script src="./js/babel.js"></script>
+       
+        <script type="text/babel">
+            const rootHandle=document.getElementById('root')
+            class Customers extends React.Component {
+                constructor() {
+                    console.log('constructor')
+                    super()
+                    this.state = {
+                        customers: [
+                            { id: 1, name: 'sam'},
+                            { id: 2, name: 'john'},
+                            { id: 3, name: 'rachel'},
+                            { id: 4, name: 'monica'}
+                        ],
+
+                        deleteName : ''
+                    }
+                }
+
+                onChangeHandleClick = (e) => {
+                    const deleteName = e.target.value
+                    this.setState({deleteName})
+                }
+
+                handleSumbit=(e) => {
+                    e.preventDefault()
+                    if(this.state.customers.find(customer => customer.name.toLowerCase() == this.state.deleteName.toLowerCase())){
+                        this.setState((prevState) => ({
+                    customers : prevState.customers.filter(customer => customer.name.toLowerCase() != this.state.deleteName.toLowerCase())
+                }))
+            }
+            else {
+                window.alert("Inputted name is not present")
+            }
+                }
+
+                render(){
+                    console.log('render')
+                    return(
+                        <div>
+                            <h2> Listing Customers - {this.state.customers.length} </h2>
+                            <ul>
+                                { this.state.customers.map(customer => {
+                                    return <li key={customer.id}>{customer.name}</li>
+                                })} 
+                            </ul>
+                            <form onSubmit={this.handleSumbit}>
+                            <input type="text" placeholder="Enter name" value = {this.state.deleteName} 
+                                onChange={this.onChangeHandleClick} />
+                            <input type="submit" value="Remove"/>
+                            </form>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<Customers/>,rootHandle)
+        </script>
+    
+    </body>
+</html>

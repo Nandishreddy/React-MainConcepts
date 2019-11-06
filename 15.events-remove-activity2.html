@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+        <!--only onde div will be there in react-->
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/-->
+    <script src="./js/react.development.js"></script>
+
+    <!--https://unpkg.com/react-dom@16.8.6/umd/-->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!--https://unpkg.com/babel-standalone@6.26.0/babel.js-->
+    <script src="./js/babel.js"></script>
+
+    <script type="text/babel">
+       const rootHandle = document.getElementById('root')
+       
+       class Names extends React.Component {
+
+        constructor(){
+            super()
+            this.state = {
+                names : [
+                    {id:1,name:'Sam'},
+                    {id:2,name:'John'},
+                    {id:3,name:'Doe'},
+                    {id:4,name:'Sam'},
+                    {id:5,name:'Tam'}
+                ],
+                deleteName : ''
+            }
+        }
+        onChangeHandleClick = (e) => {
+            const deleteName = e.target.value
+            this.setState({deleteName})
+        }
+        handleSubmit = (e) => {
+            e.preventDefault()
+          
+            if(this.state.names.find(eachEle => eachEle.name.toLowerCase() == this.state.deleteName.toLowerCase())){
+                this.setState((prevState) => ({
+                    names : prevState.names.filter(eachEle => eachEle.name.toLowerCase() != this.state.deleteName.toLowerCase())
+                }))
+            }
+            else {
+                window.alert("Inputted name is not present")
+            }
+        }
+
+          render()
+          {
+            return (
+                <div>
+                    <h2>Listing Names</h2>
+                    <ul>
+                        {this.state.names.map(eachname =>{
+                            return <li key={eachname.id}>{eachname.name}</li>
+                        })}
+                    </ul>
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                         Enter Name
+                        </label>
+                        <textarea value = {this.state.deleteName} onChange={this.onChangeHandleClick}>
+                        </textarea> <br/>
+                        <input type="submit" text="submit"/>
+                    </form>
+                </div>
+            )
+          } 
+       }
+       ReactDOM.render(<Names />,rootHandle)
+
+  </script>
+</body>
+
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>React Elements </title>
+        </head>
+        <body>
+            <div id="root">
+                
+            </div>
+
+            <script src="./js/react.development.js"></script>
+            <script  src="./js/react-dom.development.js"></script>
+            <script src="./js/babel.js"></script>
+            <script type="text/babel">
+                const rootHandle = document.getElementById('root')
+
+                const ele = (
+                <div>
+                    <h1>User</h1>
+                    <ul>
+                        <li>Sam</li>
+                        <li>John</li>
+                        <li>Doe</li>
+                     </ul>
+                </div>
+                )
+
+                console.log(ele)
+                ReactDOM.render(ele, rootHandle)
+
+
+            </script>
+        </body>
+
+</html>

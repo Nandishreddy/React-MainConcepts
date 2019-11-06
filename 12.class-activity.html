@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        </head>
+        <body>
+            <div id="root">
+                
+            </div>
+            <script src="./js/react.development.js"></script>
+            <script  src="./js/react-dom.development.js"></script>
+            <script src="./js/babel.js"></script>
+            <script type="text/babel">
+                const rootHandle = document.getElementById('root')
+
+                class Reversestring extends React.Component{
+                    constructor(){
+                        super()
+                        this.state = {
+                            str: 'hello world'
+                        }
+                    }
+                    
+                    handleClick = () => {
+                        this.setState((prevState)=> {
+                            let reverseStr= ''
+                            for(let i=prevState.str.length-1;i>=0;i--){
+                                reverseStr=reverseStr+prevState.str[i]
+                            }
+                            return {str: reverseStr}
+                            
+                        })
+                    }
+                        
+                        
+
+                    render(){
+                        return(
+                            <div>
+                                <h2>{this.state.str}</h2>
+                                <button onClick={this.handleClick}>Reverse</button>
+                            </div>
+                        )
+                    }
+                }
+
+                const ele = (
+                    <div>
+                        <Reversestring/>
+                        </div>
+                )
+
+
+                console.log(ele)
+                ReactDOM.render(ele, rootHandle)
+            </script>
+        </body>
+
+</html>

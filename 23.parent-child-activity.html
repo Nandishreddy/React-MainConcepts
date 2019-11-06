@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        </head>
+        <body>
+            <div id="root">
+                
+            </div>
+            <script src="./js/react.development.js"></script>
+            <script  src="./js/react-dom.development.js"></script>
+            <script src="./js/babel.js"></script>
+            <script type="text/babel">
+                const rootHandle = document.getElementById('root')
+
+                function App(props) {
+                    return (
+                        <div>
+                            <h1>App component</h1>
+                            <Parent title="Parent component" />
+                        </div>
+                    )
+                }
+
+                function Parent(props){
+                    return(
+                        <div>
+                            <h2>Parent Component</h2>
+                            <Component1 msg="Component1" />
+                            <Component2 msg="Component2 call class component" />
+                            <Component3 msg="Component3 call function component" />
+                        </div>
+                    )
+                }
+
+                class Component1 extends React.Component{
+                    render(){
+                        return (
+                        <div>
+                            <h3>Component1-{this.props.msg}</h3>
+                        </div>
+                    )}
+                }
+
+                //convert function component to class component
+                // function Component2(props) {
+                //     return (
+                //         <div>
+                //             <h2> Component2 - {props.msg}
+                //         </div>
+                //     )
+                // }
+                class Component2 extends React.Component {
+                    render(){
+                    return (
+                        <div>
+                            <h2> Component2 - {this.props.msg}</h2>
+                        </div>
+                    )}
+                }
+
+                //convert clss component to function component
+                // class Component3 extends React.Component {
+                //     render(){
+                //     return (
+                //         <div>
+                //             <h2> Component3 - {this.props.msg}</h2>
+                //         </div>
+                //     )}
+                // }
+
+                function Component3(props) {
+                    return (
+                        <div>
+                            <h2> Component3 - {props.msg} </h2>
+                        </div>
+                    )
+                }
+                
+
+                ReactDOM.render(<App />, rootHandle)
+            </script>
+        </body>
+
+</html>

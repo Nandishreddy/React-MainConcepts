@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        </head>
+        <body>
+            <div id="root">
+                
+            </div>
+            <script src="./js/react.development.js"></script>
+            <script  src="./js/react-dom.development.js"></script>
+            <script src="./js/babel.js"></script>
+            <script type="text/babel">
+                const rootHandle = document.getElementById('root')
+
+                function App(props) {
+                    return (
+                        <div>
+                            <h1>App component</h1>
+                            <Parent title="Parent component" />
+                        </div>
+                    )
+                }
+
+                function Parent(props){
+                    return(
+                        <div>
+                            <h2>{props.title}</h2>
+                            <Child name="karan" />
+                            <Child name="arjun" />
+                        </div>
+                    )
+                }
+
+                function Child(props){
+                    return(
+                        <div>
+                            <h3>Child Component-{props.name}</h3>
+
+                        </div>
+                    )
+                }
+
+                ReactDOM.render(<App />, rootHandle)
+            </script>
+        </body>
+
+</html>

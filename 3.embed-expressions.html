@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        </head>
+        <body>
+            <div id="root">
+                
+            </div>
+            <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+            <script  src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+            <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+            <script type="text/babel">
+                // const rootHandle = document.getElementById('root')
+                // const msg = 'Hello World'
+
+                // function add(n1, n2) {
+                //     return n1 + n2
+                // }
+
+                // const ele = <h1> {msg} {add(10,20)}</h1>
+
+                // ReactDOM.render(ele, rootHandle)
+
+                const rootHandle=document.getElementById('root')
+                const  msg = 'hi'
+                function fizzBuzz(n) {
+                    for(let i=0; i <=5; i++){
+                        console.log(i)
+                            if(i % 5 === 0 && i % 3 === 0){
+                        return i+' FizzBuzz'
+                        } else if(i % 3 === 0){
+                        return 'Fizz'
+                        } else if(i % 5 === 0){
+                        return 'Buzz'
+                        }
+                        else{
+                            return " "
+                        }
+                    }
+                }
+                const ele = <h2>{msg}{fizzBuzz(10)}</h2>               
+
+                ReactDOM.render(ele,rootHandle)
+            </script>
+        </body>
+
+</html>

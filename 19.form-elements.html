@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        </head>
+        <body>
+            <div id="root">
+                
+            </div>
+            <script src="./js/react.development.js"></script>
+            <script  src="./js/react-dom.development.js"></script>
+            <script src="./js/babel.js"></script>
+            <script type="text/babel">
+                const rootHandle = document.getElementById('root')
+                class Registration extends React.Component{
+                    constructor(){
+                        super()
+                        this.state={
+                            name: '',
+                            email: '',
+                            password: '',
+                            terms: false,
+                            professionData: [
+                                {id:1, name: 'Accountant'},
+                                {id:2, name: 'Software Engineer'},
+                                {id:3, name: 'Auditor'}
+                            ]
+                        }
+                        this.handleNameChange = this.handleNameChange.bind(this)
+                    }
+
+                    handleNameChange(e){
+                        const name = e.target.value
+                        this.setState({name})
+                    }
+
+                    handleEmailChange=(e)=>{
+                        const email = e.target.value
+                        this.setState({email})
+                    }
+
+                    handlePasswordChange=(e)=>{
+                        const password = e.target.value
+                        this.setState({password})
+                    }
+
+                    handleProfessionChange=(e)=>{
+                        const professionData = e.target.value
+                        this.setState({professionData})
+                    }
+
+                    handleTermsChange=(e)=>{
+                        const terms = e.target.checked
+                        this.setState({terms})
+                    }
+
+                    render(){
+                        return(
+                            <div>
+                                <form>
+                                    <lable>
+                                        Name
+                                        <input type="text" value={this.state.name} onChange={this.handleNameChange} />
+                                    </lable><br/>
+                                    <lable>
+                                        Email
+                                        <input type="email" value={this.state.email} onChange={this.handleEmailChange} />
+                                    </lable><br/>
+                                    <lable>
+                                        Password
+                                        <input type="text" value={this.state.password} onChange={this.handlePasswordChange} />
+                                    </lable><br/>
+                                    <lable>Proffession
+                                        <select>
+                                            <option value=''>Select</option>
+                                            {this.state.professionData.map(profession=>{
+                                                return <option value={profession.id} key={profession.id}>{profession.name}</option>
+                                            })}
+                                        </select>
+                                    </lable><br/>
+
+                                    <lable> Terms & Conditions
+                                        <input type="checkbox" value={this.state.terms} onChange={this.handleTermsChange} />
+                                    </lable><br/>
+
+                                    <input type="submit" value="Register" disabled={!this.state.terms} />
+                                </form>
+                            </div>
+                        )
+                    }
+
+                }
+                
+                ReactDOM.render(<Registration/>, rootHandle)
+            </script>
+        </body>
+
+</html>

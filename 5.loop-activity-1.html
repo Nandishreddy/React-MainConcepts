@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+        </head>
+        <body>
+            <div id="root">
+                
+            </div>
+            <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+            <script  src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+            <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+            <script type="text/babel">
+                const rootHandle = document.getElementById('root')
+                const links = [
+                    {id:1, name: 'google'},
+                    {id:1, name: 'facebook'},
+                    {id:1, name: 'dct'}
+                ]
+                const ele = (
+                    <div>
+                    <h1>Listing Links {links.length}</h1>
+                    <ul>{links.map(function(link){
+                        return <li key={link.id}>{link.name}</li>
+                    })}</ul>
+                    </div>
+                )
+
+                ReactDOM.render(ele, rootHandle)
+            </script>
+        </body>
+
+</html>
